@@ -1,5 +1,7 @@
 🎬 Movie Recommendation System
 A simple and effective movie recommender that suggests similar movies based on text similarity.
+
+
 🔍 How It Works
 
 
