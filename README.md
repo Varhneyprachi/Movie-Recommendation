@@ -1,61 +1,76 @@
 🎬 Movie Recommendation System
+A simple and effective movie recommender that suggests similar movies based on text similarity.
+🔍 How It Works
 
-A simple and clean machine-learning project that recommends movies based on similarity using NLP.
 
-🛠 Tech Stack
+Loads movie and credits data
 
-Python 3.x
+
+Combines overview, genres, and keywords into a single text field
+
+
+Converts text into vectors
+
+
+Finds similar movies using cosine similarity
+
+
+🛠 Technologies Used
+
+
+Python
+
+
+pandas
+
+
+numpy
+
 
 scikit-learn
 
-pandas, numpy
 
-Streamlit (optional)
+Streamlit (optional UI)
 
-📂 Project Structure
-Movie-Recommendation-System/
-│── data/
-│── src/
-│── app.py
-│── requirements.txt
-│── README.md
 
-🧠 How It Works (Short)
-1️⃣ Prepare Dataset
+📁 Project Structure
 
-Merge movie & credits data and keep the useful columns.
 
-2️⃣ Create a “tags” column
-df["tags"] = df["overview"] + " " + df["genres"] + " " + df["keywords"]
+data/
 
-3️⃣ Convert Text → Numbers
-from sklearn.feature_extraction.text import CountVectorizer
-vectors = CountVectorizer(stop_words="english").fit_transform(df["tags"]).toarray()
 
-4️⃣ Compute Similarity
-from sklearn.metrics.pairwise import cosine_similarity
-similarity = cosine_similarity(vectors)
+src/
+
+
+app.py
+
+
+requirements.txt
+
 
 ▶️ How to Run
 
-Install dependencies:
 
+Install dependencies:
 pip install -r requirements.txt
 
 
-Run the app:
-
+Start the app:
 python app.py
-
-
-(Optional)
-
+or
 streamlit run app.py
 
-⭐ Future Updates
 
-Add posters
+🚀 Future Improvements
+
+
+Add poster images
+
 
 Improve UI
 
-Add more recommendation logic
+
+Add advanced recommendation methods
+
+
+
