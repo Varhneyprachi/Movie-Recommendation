@@ -1,122 +1,61 @@
-🎬 Movie Recommendation System – Machine Learning Project
+🎬 Movie Recommendation System
 
-A content-based movie recommender built using Python, NLP, and Machine Learning.
-The system recommends movies similar to the one you select — using text vectorization + cosine similarity.
+A simple and clean machine-learning project that recommends movies based on similarity using NLP.
 
-🌟 Highlights
+🛠 Tech Stack
 
-🎯 Accurate content-based recommendations
+Python 3.x
 
-🤖 Uses NLP on genres, keywords, overview, cast & crew
+scikit-learn
 
-⚡ Fast cosine similarity search on 5000+ feature vectors
+pandas, numpy
 
-🧹 Complete preprocessing pipeline
+Streamlit (optional)
 
-🖥 Can be deployed via Streamlit
-
-🗂 Clean modular Python code
-
-🛠 Tech Used
-Component	Technology
-Language	Python 3.x
-ML / NLP	scikit-learn, NLTK
-Data	pandas, numpy
-Deployment	Streamlit (optional)
 📂 Project Structure
 Movie-Recommendation-System/
 │── data/
-│   ├── movies.csv
-│   ├── credits.csv
-│
 │── src/
-│   ├── preprocess.py
-│   ├── recommend.py
-│   ├── utils.py
-│
 │── app.py
 │── requirements.txt
 │── README.md
 
-🧠 How the Recommender Works
+🧠 How It Works (Short)
+1️⃣ Prepare Dataset
 
-A simple overview of the exact ML logic used.
+Merge movie & credits data and keep the useful columns.
 
-1️⃣ Load & Merge Data
-movies = pd.read_csv("movies.csv")
-credits = pd.read_csv("credits.csv")
-
-df = movies.merge(credits, on="id")
-
-2️⃣ Clean + Combine Features Into a Single “Tags” Column
-def clean_text(x):
-    return x.lower().replace(" ", "")
-
+2️⃣ Create a “tags” column
 df["tags"] = df["overview"] + " " + df["genres"] + " " + df["keywords"]
-df["tags"] = df["tags"].apply(clean_text)
 
-3️⃣ Vectorization Using CountVectorizer (Top 5000 Words)
+3️⃣ Convert Text → Numbers
 from sklearn.feature_extraction.text import CountVectorizer
+vectors = CountVectorizer(stop_words="english").fit_transform(df["tags"]).toarray()
 
-cv = CountVectorizer(max_features=5000, stop_words="english")
-vectors = cv.fit_transform(df["tags"]).toarray()
-
-4️⃣ Similarity Matrix (Cosine Similarity)
+4️⃣ Compute Similarity
 from sklearn.metrics.pairwise import cosine_similarity
-
 similarity = cosine_similarity(vectors)
 
-5️⃣ Recommendation Function
-def recommend(movie_name):
-    index = df[df["title"] == movie_name].index[0]
-    distances = similarity[index]
+▶️ How to Run
 
-    movies_list = sorted(
-        list(enumerate(distances)),
-        reverse=True,
-        key=lambda x: x[1]
-    )[1:6]
+Install dependencies:
 
-    for i in movies_list:
-        print(df.iloc[i[0]].title)
-
-▶️ Run Locally
-Install dependencies
 pip install -r requirements.txt
 
-Start the project
+
+Run the app:
+
 python app.py
 
-(Optional) Run the Streamlit App
+
+(Optional)
+
 streamlit run app.py
 
-📸 Example Output
-Enter movie: Inception
+⭐ Future Updates
 
-Recommended Movies:
-1. Interstellar
-2. Shutter Island
-3. The Prestige
-4. The Matrix
-5. Tenet
+Add posters
 
-🚀 Future Improvements
+Improve UI
 
-Add TMDB API for posters & movie details
-
-Add collaborative filtering (user-based)
-
-Add hybrid recommendation engine
-
-Add rating-based ranking
-
-Deploy on Render/Netlify/Streamlit Cloud
-
-🤝 Contributing
-
-Feel free to open PRs or issues. Contributions are always welcome!
-
-⭐ Show Support
-
-If this project helped you, please ⭐ the repo!
-
+Add more recommendation logic
